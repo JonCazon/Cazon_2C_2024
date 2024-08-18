@@ -1,8 +1,17 @@
-/*! @mainpage Blinking switch
+/*! @mainpage Template
  *
- * \section genDesc General Description
+ * @section genDesc General Description
  *
- * This example makes LED_1 and LED_2 blink if SWITCH_1 or SWITCH_2 are pressed.
+ * This section describes how the program works.
+ *
+ * <a href="https://drive.google.com/...">Operation Example</a>
+ *
+ * @section hardConn Hardware Connection
+ *
+ * |    Peripheral  |   ESP32   	|
+ * |:--------------:|:--------------|
+ * | 	PIN_X	 	| 	GPIO_X		|
+ *
  *
  * @section changelog Changelog
  *
@@ -13,7 +22,9 @@
  * @author Albano Peñalva (albano.penalva@uner.edu.ar)
  *
  */
-
+/* CONSIGNA: Modifique la aplicación 1_blinking_switch de manera de hacer titilar los leds 1 y 2 al mantener presionada las teclas 1 y 2 correspondientemente. También se debe poder hacer titilar el led 3 al presionar simultáneamente las teclas 1 y 2. (Para esto cree un nuevo proyecto siguiendo el instructivo Proyecto nuevo)
+En el siguiente video se puede observar el funcionamiento deseado del sistema: LINK
+*/
 /*==================[inclusions]=============================================*/
 #include <stdio.h>
 #include <stdint.h>
@@ -42,9 +53,16 @@ void app_main(void){
     		case SWITCH_2:
     			LedToggle(LED_2);
     		break;
+			case (SWITCH_1|SWITCH_2):
+    		     LedToggle(LED_3);
+    		break;
     	}
-	    LedToggle(LED_3);
+	   // LedToggle(LED_3);
 		vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
 
+		
 	}
 }
+
+
+/*==================[end of file]============================================*/
