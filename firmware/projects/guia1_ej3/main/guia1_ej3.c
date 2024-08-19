@@ -47,38 +47,56 @@ typedef struct leds
 
 /*==================[internal functions declaration]=========================*/
 
-void Funcion_Led (struct leds* puntero_Eled){
-	   switch(puntero_Eled->mode){
-    		case 1:
-    			LedOn(LED_1);
-				LedOn(LED_2);
-				LedToggle(LED_3);
-    		   break;
-    		case 0:
-    			LedOff(LED_1);
-				LedOff(LED_2);
-				LedOff(LED_3);
-    	      break;
-		
-    	                       }
-		if (puntero_Eled->mode==2)
-		{   switch(puntero_Eled->n_led){
-    		case 1:
-    			LedToggle(LED_1);
-    		   break;
-    		case 2:
-    			LedToggle(LED_2);
-    	      break;
-			  case 3:
-    			LedToggle(LED_3);
-    	      break;
-		
-    	                       }}
 
-		    
-		}
-	
-	
+void Funcion_Led(struct leds * puntero_Eled){
+	switch(puntero_Eled->mode)
+	    	{	case 0:
+					  switch(puntero_Eled->n_led)
+				   	 {  	case 1:
+					 	 		LedOff(LED_1);		
+				    			break;
+					    	case 2:
+						  		LedOff(LED_2);
+								break;
+							case 3:
+								LedOff(LED_3);
+								break;
+					 }
+				break;
+	    		case 1:
+	    			   switch(puntero_Eled->n_led)
+					  {	case 1:
+	    						LedOn(LED_1);
+	    						break;
+	    				case 2:
+	    						LedOn(LED_2);
+	    						break;
+	    				case 3:
+	    						LedOn(LED_3);
+	    						break;
+					}
+	    		break;
+	    		case 2:
+	    			for(int i=0;i<puntero_Eled->n_ciclos;i++){
+	    				switch(puntero_Eled->n_led)
+	    				{
+	    					case 1:
+	    					     LedToggle(LED_1);
+    		                     break;
+	    					case 2:
+	    						 LedToggle(LED_2);
+    		                     break;
+	    					case 3:
+	    						 LedToggle(LED_3);
+    		                     break;
+	    				}
+					for(int j=0;j<puntero_Eled->periodo;j++){
+                        vTaskDelay(puntero_Eled->periodo / portTICK_PERIOD_MS);
+					}	
+	    			}
+	    		break;
+	    	}
+}	
 	   
 		
 
@@ -90,8 +108,8 @@ void app_main(void){
 	my_leds led;
 	led.mode =2;
 	led.n_led=LED_3;
-	led.n_ciclos= 5;
-	led.periodo= 3000000;
+	led.n_ciclos= 10;
+	led.periodo= 1500000;
 	Funcion_Led(&led);
 while (1){
 
