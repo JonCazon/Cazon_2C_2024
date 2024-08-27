@@ -49,10 +49,10 @@ gpioConf_t mis_pines[]={
 };
 /*==================[internal functions declaration]=========================*/
 
-
-void bcdToPin(uint8_t bcd, gpioConf_t *gpio) {
-	for(int i=0; i<4; i++) {
-		GPIOInit(gpio[i].pin, gpio[i].dir);
+//FUncion que pone el dato bcd en los pines de la entradra del conversor bcd de 7 segmentos
+void bcdToPin(uint8_t bcd, gpioConf_t *gpio) {   //recibe el dato en bcd
+	for(int i=0; i<4; i++) {                     // y recibe el vector que contiene las estructuras
+		GPIOInit(gpio[i].pin, gpio[i].dir);      // gpioConf_t con el pin y su direccion 
 		if(bcd&(1 << i)) {
 			GPIOOn(gpio[i].pin);
 		} else GPIOOff(gpio[i].pin);
@@ -62,7 +62,7 @@ void bcdToPin(uint8_t bcd, gpioConf_t *gpio) {
 /*==================[external functions definition]==========================*/
 void app_main(void){
 /* initializations */
-	uint8_t bcd=6; // este numero ya es bcd o lo tengo que convertir ¡?
+	uint8_t bcd=4; // este numero ya es bcd o lo tengo que convertir ¡?
 
 	bcdToPin(bcd, mis_pines);
 
