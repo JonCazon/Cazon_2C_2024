@@ -91,7 +91,7 @@ void Funcion_Led(struct leds * puntero_Eled){
     		                     break;
 	    				}
 					for(int j=0;j<puntero_Eled->periodo/100;j++){
-                        vTaskDelay(100 / portTICK_PERIOD_MS);
+                        vTaskDelay(100 / portTICK_PERIOD_MS); // convieto los tick en milisegundo
 					}	
 	    			}
 	    		break;

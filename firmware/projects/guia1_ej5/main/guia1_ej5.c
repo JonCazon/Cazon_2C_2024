@@ -54,8 +54,8 @@ void bcdToPin(uint8_t bcd, gpioConf_t *gpio) {   //recibe el dato en bcd
 	for(int i=0; i<4; i++) {                     // y recibe el vector que contiene las estructuras
 		GPIOInit(gpio[i].pin, gpio[i].dir);      // gpioConf_t con el pin y su direccion 
 		if(bcd&(1 << i)) {
-			GPIOOn(gpio[i].pin);
-		} else GPIOOff(gpio[i].pin);
+			GPIOOn(gpio[i].pin);    // va comparando el bcd y si es un lo pone en el pin
+		} else GPIOOff(gpio[i].pin); // si no lo pone en cero
 	}
 }
 
