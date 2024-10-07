@@ -47,6 +47,15 @@
         {
             "name": "guia2_ej1Distancia",
             "path": "projects/guia2_ej1Distancia"
+        },
+        {
+            "path": "projects/guia2_act2"
+        },
+        {
+            "path": "projects/guia2_act3"
+        },
+        {
+            "path": "projects/guia2_act4"
         }
     ],
     "settings": {
