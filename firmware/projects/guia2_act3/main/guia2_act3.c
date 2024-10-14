@@ -47,7 +47,7 @@ Con las teclas “O” y “H”, replicar la funcionalidad de las teclas 1 y 2 
 
  /*==================[macros and definitions]=================================*/
 
-#define CONFIG_BLINK_PERIOD_US 1000000
+#define CONFIG_BLINK_PERIOD_US 1000000 // para el tiempo daoo que la computadora es rapida orden de microsegundos 
 /**   
 * 
 *  @brief  activar  las dos variables se usa para poder llevar un estado de ver si las teclas estan o no activadas
@@ -61,6 +61,7 @@ void Funcion_Leer_teclas(void);
 
 
 /*==================[internal data definition]===============================*/
+// estructura con los parametros para inicializar el puerto y sus interrupciones  
 serial_config_t uart_pc_monitor = {			
     .port=UART_PC,	/*!< port */
 	.baud_rate=115200,		/*!< baudrate (bits per second) */

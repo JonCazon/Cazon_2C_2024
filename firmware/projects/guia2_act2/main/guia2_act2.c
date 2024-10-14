@@ -116,7 +116,8 @@ void Funcion_Tecla_2(){
 	hold=!hold;
 	}
 
-
+//memo aqui usando las interrupciones del teclado, configuro para cuando se aprepietan 
+// hacen lo mismo que el punto anterior
 
 /*==================[external functions definition]==========================*/
 void app_main(void){

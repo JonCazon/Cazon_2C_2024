@@ -1,121 +1,140 @@
-/*! @mainpage Template
+/*!
+ * @mainpage Guía 2 - Actividad 4 - conversion Analogico a digital 
+ * @section genDesc Descripción General
  *
- * @section genDesc General Description
+ * problema a resolver: diseniar un programa dispara la conversión A/D a través de una interrupción de timer
+ * cada 2 ms, lo que genera una frecuencia de muestreo de 500 Hz.
+ * 
+ * Los datos de la conversión son transmitidos por UART en formato ASCII y visualizados
+ * mediante un graficador serie de código abierto llamado "Serial Oscilloscope".
+ * 
+ * El formato de envío de datos es "11\r". Por ejemplo, si hubiera más de un canal,
+ * sería "11,22,33\r", donde 11, 22 y 33 corresponden a los canales 1, 2 y 3 respectivamente.
  *
- * This section describes how the program works.
+ * @section hardConn Conexión de Hardware
  *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * - Canal ADC conectado al CH1.
+ * - UART configurada a 115200 baud.
  *
- * @section hardConn Hardware Connection
+ * @section changelog Historial de Cambios
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * |   Fecha      | Descripción                                    |
+ * |:------------:|:-----------------------------------------------|
+ * | xx/xx/2024   | Creación del documento                         |
+ * | xx/xx/2024   | Agregaron comentarios y documentación          |
  *
- *
- * @section changelog Changelog
- *
- * |   Date	    | Description                                    |
- * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
- *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
- *
+ * @author
+ * Jontan Cazon
  */
 
 /*==================[inclusions]=============================================*/
+
 #include <stdio.h>
 #include <stdint.h>
-#include "analog_io_mcu.h" // en este punto se usa
-#include "uart_mcu.h"
-#include "timer_mcu.h"
-
-#include <stdbool.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "hc_sr04.h" 
-#include "lcditse0803.h"
-#include "switch.h"
-
-
+#include "analog_io_mcu.h" //conversorres
+#include "uart_mcu.h" // puertos
+#include "timer_mcu.h" // timmers
+#include "gpio_mcu.h" //  pines 
 
 /*==================[macros and definitions]=================================*/
 
+/**
+ * @brief constante Período del Timer A en microsegundos.
+ */
+#define CONFIG_PERIOD_ADC 2000 // 2ms período del Timer
+
+/**
+ * @brief Variable para almacenar el valor leído en el  ADC.
+ */
+uint16_t valores; // Valor leído del ADC
+
 /*==================[internal data definition]===============================*/
-serial_config_t puerto_serie;
 
-unsigned char code_ECG[] = {
-17,17,17,17,17,17,17,17,17,17,17,18,18,18,17,17,17,17,17,17,17,18,18,18,18,18,18,18,17,17,16,16,16,16,17,17,18,18,18,17,17,17,17,
-18,18,19,21,22,24,25,26,27,28,29,31,32,33,34,34,35,37,38,37,34,29,24,19,15,14,15,16,17,17,17,16,15,14,13,13,13,13,13,13,13,12,12,
-10,6,2,3,15,43,88,145,199,237,252,242,211,167,117,70,35,16,14,22,32,38,37,32,27,24,24,26,27,28,28,27,28,28,30,31,31,31,32,33,34,36,
-38,39,40,41,42,43,45,47,49,51,53,55,57,60,62,65,68,71,75,79,83,87,92,97,101,106,111,116,121,125,129,133,136,138,139,140,140,139,137,
-133,129,123,117,109,101,92,84,77,70,64,58,52,47,42,39,36,34,31,30,28,27,26,25,25,25,25,25,25,25,25,24,24,24,24,25,25,25,25,25,25,25,
-24,24,24,24,24,24,24,24,23,23,22,22,21,21,21,20,20,20,20,20,19,19,18,18,18,19,19,19,19,18,17,17,18,18,18,18,18,18,18,18,17,17,17,17,
-17,17,17
-
-} ;
-int i=0;
+/**
+ * @brief Handle de la tarea encargada de la conversión ADC.
+ */
+TaskHandle_t conversion_ADC_task_handle = NULL; //Handle de la tarea ADC
 
 /*==================[internal functions declaration]=========================*/
 
+/**
+ * @brief Función conversión ADC de los valores que entran por el ch1 y los envia al puerto.
+ * 
+ * la conversión ADC se dispara con la interrupcion
+ * interrupción del Timer A. Convierte los datos a formato ASCII y los envía por UART.
+ * 
+ * @param pParam Puntero a los parámetros de la tarea (no se utiliza).
+ */
+static void conversionADC(void *pParam) {
+    while (true) {
+        
+        // obtiene valor analógico (ADC) del canal CH1 y lo guarda en la variable global valores.
+		AnalogInputReadSingle(CH1, &valores);
+       
+        UartSendString(UART_PC, (char*) UartItoa(valores, 10));
+		// fuerza la converison casteo
+		UartSendString(UART_PC, "\r"); // para establecer el caracter fin 
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // para la interrupcion
+    }
+}
+
+/**
+ * @brief Función que se ejecuta en la interrupción del Timer A.
+ * 
+ * 
+ * @param pParam Puntero a los parámetros de la función (no se utiliza).
+ */
+void funcion_TimerA(void *pParam) {
+    vTaskNotifyGiveFromISR(conversion_ADC_task_handle, pdFALSE); // Notificación a la tarea ADC
+}
+
+
 /*==================[external functions definition]==========================*/
-void Timer_ADC(){   //llama a la interrupcion cada cierto tiempo
-	//AnalogStartConvertion();   // de analogico a digital
-	AnalogStartContinuous(CH1);
+
+/**
+ * @brief Función Main donde se unifica para resolver el planteo del problema.
+ 
+ 
+ */
+void app_main(void) {
+    // Configuración del canal ADC en modo de conversión única
+    analog_input_config_t ADC_config = {
+        .input = CH1,
+        .mode = ADC_SINGLE
+    };
+
+    AnalogInputInit(&ADC_config); //Inicializar el canal ADC
+    AnalogOutputInit(); //Inicializa la salida analógica
+
+    // Configuración del Timer A
+    timer_config_t timerA = {
+        .timer = TIMER_A,
+        .period = CONFIG_PERIOD_ADC,
+        .func_p = funcion_TimerA,
+        .param_p = NULL
+    };
+
+    TimerInit(&timerA); // Inicialización del Timer A
+
+    // Configuración de la UART
+    serial_config_t Uart = {
+        .port = UART_PC,
+        .baud_rate = 115200,
+        .func_p = NULL,
+        .param_p = NULL
+    };
+
+    UartInit(&Uart); ///< Inicializo la UART
+
+    // Creación de la tarea de conversión ADC
+    xTaskCreate(&conversionADC, "digitalizar_senial_CH1", 512, NULL, 5, &conversion_ADC_task_handle);
+
+    TimerStart(timerA.timer); // Inicio del Timer A
 }
 
-void Timer_DAC(){  //digital a analogico
-	//AnalogOutputWrite(uint8_t value);
-	AnalogOutputWrite(code_ECG[i]);
-	i++;
-	if((sizeof(code_ECG)-1 )==i){
-		i=0;
-	}
-}
-void Conversion_fin(){
-	uint16_t dato;
-	//AnalogInputRead(CH1,&dato);
-	AnalogInputReadSingle(CH1, &dato);
-	UartSendString(puerto_serie.port,( char*)UartItoa(dato,10));
-	//UartSendString(uart_mcu_port_t port, const char *msg);
-
-	UartSendString(puerto_serie.port, "\r");
-}
-
-
-
-void app_main(void){
-/* initializations */
-	analog_input_config_t inputs;
-	inputs.input= CH1;
-	inputs.mode = ADC_SINGLE;
-	inputs.param_p = Conversion_fin;
-
-	puerto_serie.port = UART_PC;
-	puerto_serie.baud_rate = 115200;
-	//puerto_serie.param_p = ;
-
-	AnalogInputInit(&inputs);
-	//AnalogInputInit(analog_input_config_t *config);
-	UartInit(&puerto_serie);
-	AnalogOutputInit();
-
-
-	timer_config_t timer;
-	timer.timer= TIMER_A;
-	timer.period= 2;
-	timer.func_p= Timer_ADC;
-	TimerInit(&timer);
-	TimerStart(timer.timer);
-	
-	timer_config_t timer2;
-	timer2.timer= TIMER_B;
-	timer2.period= 4;
-	timer2.func_p= Timer_DAC;
-	TimerInit(&timer2);
-	TimerStart(timer2.timer);
-
-
-	//printf("Hello world!\n");
-}
 /*==================[end of file]============================================*/
+
+
+
