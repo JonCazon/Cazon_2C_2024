@@ -35,7 +35,7 @@ utilizar el potenciómetro para conectar la salida del DAC a la entrada CH1 del 
 #include "timer_mcu.h"
 #include "gpio_mcu.h"
 
-/==================[macros and definitions]=================================/
+/*==================[macros and definitions]=================================*/
 
 #define CONFIG_PERIOD_A_DAC 4000 // 4mse seg
 /**
@@ -45,7 +45,7 @@ utilizar el potenciómetro para conectar la salida del DAC a la entrada CH1 del 
 /**
  * @brief Variable para almacenar el valor leído en el  ADC.
  */
-uint16_t valores;
+uint16_t valores; 
 /**
  * @brief contador para llegar el mumero de valores.
  */
@@ -95,7 +95,7 @@ TaskHandle_t conversion_ADC_task_handle = NULL;
 static void conversionDAC(void *pParam){
 	while(true){
 		
-		if(contador_posicion<code_ECG[].size){
+		if(contador_posicion<sizeof(code_ECG)){
 			//ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 			AnalogOutputWrite(code_ECG[contador_posicion]);
 			contador_posicion++;
