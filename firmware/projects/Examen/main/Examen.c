@@ -2,7 +2,10 @@
  *
  * @section momento de examen
 *
-*
+** @section hardConn Conexión de Hardware
+ *
+ * - Canal ADC conectado al CH1 CH2 CH3
+ * - UART configurada a 115200 baud.
  *
  * @section hardConn Hardware Connection
  *
@@ -53,18 +56,7 @@ uint16_t valore3;
  * @def CONFIG_BLINK_PERIOD_US
  *@brief  variable para dar una el retardo de tiempo 
 */
-#define CONFIG_BLINK_PERIOD_US 1000000/2
-/**   
-*  @brief Delay1   tiempo para poder mediendo 
-*	@brief  Delay2	 tiempo que se usa para poder leer el teclado, asi evitar error en las lecturas
-*  @brief  activar  las dos variables se usa para poder llevar un estado de ver si las teclas estan o no activadas
-    @brief  hold   
-*/
-//#define Delay1 1000 // 
-//#define Delay2 100 // 
-
-//bool activar=false;
-//bool hold=false;
+#define CONFIG_BLINK_PERIOD_US 500000
 
 /*==================[internal data definition]===============================*/
 TaskHandle_t Dis_task_handle = NULL;
@@ -173,32 +165,6 @@ static void Leer_Distancia(void *pvParameter){
 void funcion_TimerA(void *pParam) {
     vTaskNotifyGiveFromISR(conversion_ADC_task_handle, pdFALSE); // Notificación a la tarea ADC
 }
-/*
-/** @fn LeerTeclado(void *pvParameter) 
-  * @brief funcion lee el estado del teclado
-  * @param [*pvParameter]
-  * @return [static]
-  */
-/*static void LeerTeclado(void *pvParameter){
-    while(true){
-      int8_t teclas=SwitchesRead();
-              
-	if(teclas == SWITCH_1)
-	{
-		activar=!activar;
-         vTaskDelay(Delay2 / portTICK_PERIOD_MS);
-	}
-
-	if(teclas ==SWITCH_2){
-		hold=!hold;
-        vTaskDelay(Delay2/ portTICK_PERIOD_MS);
-	}
-        
-        vTaskDelay(Delay2 / portTICK_PERIOD_MS);
-
-    }
-}
-*/
 
 /*==================[external functions definition]==========================*/
 void app_main(void){
