@@ -41,14 +41,14 @@
 /**
  * @brief constante Período del Timer A en microsegundos.
  */
-#define CONFIG_PERIOD_ADC 2000 // 2ms período del Timer
+#define CONFIG_PERIOD_ADC 10 // 2ms período del Timer
 
 /**
  * @brief Variable para almacenar el valor leído en el  ADC.
  */
-uint16_t valores; // Valor leído del ADC
-
-
+uint16_t valore1; // Valor leído del ADC
+uint16_t valore2;
+uint16_t valore3;
 /** 
  * @def CONFIG_BLINK_PERIOD_US
  *@brief  variable para dar una el retardo de tiempo 
@@ -76,6 +76,26 @@ TaskHandle_t conversion_ADC_task_handle = NULL; //Handle de la tarea ADC
 
 
 /*==================[internal functions declaration]=========================*/
+
+
+static void conversionADC(void *pParam) {
+    while (true) {
+        
+        // obtiene valor analógico (ADC) del canal CH1 y lo guarda en la variable global valores.
+		AnalogInputReadSingle(CH1, &valore1);
+       AnalogInputReadSingle(CH2, &valore2);
+       AnalogInputReadSingle(CH3, &valore3);
+       uint16_t sumado= valore1+valore2+valore3;  
+         if(sumado>1.2)(
+        UartSendString(UART_PC, (char*) UartItoa( sumado, 10));
+		// fuerza la converison casteo
+		UartSendString(UART_PC, "\r"); ) // para establecer el caracter fin 
+
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // para la interrupcion
+    }
+}
+
+
 /** @fn FuncTimer_Distancia(void* param)
  *@brief Función invocada en la interrupción del timer A
  */
@@ -149,10 +169,9 @@ static void Leer_Distancia(void *pvParameter){
     
 }
 
-static void funcion_Estabilidad(void *pvParameter){
 
-
-
+void funcion_TimerA(void *pParam) {
+    vTaskNotifyGiveFromISR(conversion_ADC_task_handle, pdFALSE); // Notificación a la tarea ADC
 }
 /*
 /** @fn LeerTeclado(void *pvParameter) 
@@ -197,8 +216,37 @@ TimerInit(&timer_momento_1);
     HcSr04Init(GPIO_3,GPIO_2); // de digo los puertos que usa la placa
      //SwitchesInit(); // teclado
 
+ // Configuración del canal ADC en modo de conversión única
+    analog_input_config_t ADC_config = {
+        .input = CH1,
+        .mode = ADC_SINGLE
+    };
+
+    AnalogInputInit(&ADC_config); //Inicializar el canal ADC
+    AnalogOutputInit(); //Inicializa la salida analógica
+
+    // Configuración del Timer A
+    timer_config_t timerA = {
+        .timer = TIMER_A,
+        .period = CONFIG_PERIOD_ADC,
+        .func_p = funcion_TimerA,
+        .param_p = NULL
+    };
+
+    TimerInit(&timerA); // Inicialización del Timer A
+
+    // Configuración de la UART
+    serial_config_t Uart = {
+        .port = UART_PC,
+        .baud_rate = 115200,
+        .func_p = NULL,
+        .param_p = NULL
+    };
+
+    UartInit(&Uart); ///< Inicializo la UART
+
     xTaskCreate(&Leer_Distancia, "Distancia", 512, NULL, 5, NULL);
-    xTaskCreate(&funcion_Estabilidad, "giroscopio", 512, NULL, 5, NULL);
+    xTaskCreate(&conversionADC, "giroscopio", 512, NULL, 5, NULL);
 	 /* Inicialización del conteo de timers */
     TimerStart(timer_momento_1.timer);
 
