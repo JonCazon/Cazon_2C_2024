@@ -62,6 +62,9 @@
         },
         {
             "path": "projects/Proyecto_Integrador"
+        },
+        {
+            "path": "projects/Examen"
         }
     ],
     "settings": {
@@ -119,7 +122,8 @@
             "i2c_mcu.h": "c",
             "ostream": "c",
             "compare": "c",
-            "stdio.h": "c"
+            "stdio.h": "c",
+            "dht11.h": "c"
         },
     },
     "tasks": {

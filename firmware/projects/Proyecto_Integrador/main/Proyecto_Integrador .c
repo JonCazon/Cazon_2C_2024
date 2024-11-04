@@ -36,11 +36,13 @@
 #include "ble_mcu.h"
 #include "led.h"
 #include "string.h"
+#include "rtc_mcu.h"
+#include "dht11.h"
 
 /*==================[macros and definitions]=================================*/
 #define CONFIG_PERIOD_S_A 1000000  // Periodo de 1 segundos
 
-/// Identificadores de tareas
+/// Inicialización del Identificador de tareas
 TaskHandle_t conversion_ADC_task_handle = NULL;
 TaskHandle_t control_luz_task_handle = NULL;
 
@@ -52,6 +54,18 @@ bool system_on = false;
 char mensaje[20];
 
 /*==================[internal functions declaration]=========================*/
+
+void enviarFechaHoraPorBluetooth() {
+    rtc_t current_time;
+    RtcRead(&current_time);
+
+    char fecha_hora[30];
+    sprintf(fecha_hora, "*D%02d/%02d/%04d %02d:%02d:%02d*\n", 
+            current_time.mday, current_time.month, current_time.year,
+            current_time.hour, current_time.min, current_time.sec);
+
+    BleSendString(fecha_hora);
+}
 
 /**
  * @brief Envía la temperatura por Bluetooth en el formato *Txx*
@@ -94,62 +108,50 @@ static void enviarLuminosidadPorBluetooth(uint16_t luminosidad, bool estado_moto
 }
 
 /**
- * @brief Convierte el valor ADC a grados Celsius enteros
- * @param adc_valor El valor ADC de 12 bits del sensor de temperatura
- * @return Temperatura en grados Celsius
- */
-uint16_t convertirAdcAGrados(uint16_t adc_valor) {
-    return (adc_valor * 50) / 4095;  // Conversión de 0-4095 a 0-50 grados Celsius
-}
-
-/**
  * @brief Tarea que realiza la conversión ADC de temperatura, verifica umbrales y envía la temperatura
  */
 static void conversion_ADC_task(void *pParam) {
     
-    uint16_t temperature_samples[10];
-    uint16_t umbral_temp_alto = 2000;   // Umbral alto para encender aire acondicionado
-    uint16_t umbral_calefaccion = 1000; // Umbral bajo para encender calefacción
-    uint16_t apagar_aire_acond = 3000;  // Umbral para apagar aire acondicionado o calefacción
+    //uint16_t temperature_samples[10];
+    uint16_t umbral_temp_alto = 24;   // Umbral alto para encender aire acondicionado
+    //uint16_t umbral_calefaccion = 18; // Umbral bajo para encender calefacción
+    //uint16_t apagar_aire_acond = 21;  // Umbral para apagar aire acondicionado o calefacción
     bool state_air = false;           // Estado del aire acondicionado o calefacción
 
+    enviarFechaHoraPorBluetooth();
+
     while (true) {
+        
+        float humedad = 0;
+        float temperatura = 0; 
         
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);  // Espera notificación del timer
 
         if (system_on) {  // Verifica si el sistema está encendido
             
-            // Realiza 10 muestras del sensor de temperatura
+            /*Realiza 10 muestras del sensor de temperatura
             for (int i = 0; i < 10; i++) {
                 AnalogInputReadSingle(CH1, &temperature_samples[i]);
-            }
+            }*/
 
-            // Promedia las muestras de temperatura
-            uint32_t temp_sum = 0;
-            for (int i = 0; i < 10; i++) {
-                temp_sum += temperature_samples[i];
-            }
-            uint16_t avg_temp_adc = temp_sum / 10;
+            dht11Read( &humedad, &temperatura );
             
-            // Convierte el valor ADC promedio a grados Celsius enteros
-            // uint16_t avg_temp_celsius = convertirAdcAGrados(avg_temp_adc);
-
-            // Envía la temperatura por Bluetooth
-            uint16_t avg_temp_celsius = avg_temp_adc;
-            enviarTemperaturaPorBluetooth(avg_temp_celsius, state_air);
+            enviarTemperaturaPorBluetooth(temperatura, state_air);
 
             // Verifica y ejecuta las acciones según los umbrales en grados Celsius
-            if (avg_temp_celsius > umbral_temp_alto) {
+            if (temperatura > umbral_temp_alto) {
                 printf("Temperatura alta: Encendiendo aire acondicionado\n");
-                printf("Temperatura: %d\n", avg_temp_celsius);
+                //printf("Temperatura: %d\n", temperatura);
+                printf("Temperatura: %.2f\n", temperatura);
                 state_air = true;
-                enviarTemperaturaPorBluetooth(avg_temp_celsius, state_air); // Envía la temperatura por Bluetooth con el estado del aire acondicionadoLuminosidadPorBluetooth(avg_light, state_motor);
+                enviarTemperaturaPorBluetooth(temperatura, state_air); // Envía la temperatura por Bluetooth con el estado del aire acondicionadoLuminosidadPorBluetooth(avg_light, state_motor);
                 LedOn(LED_2); // Simula encender aire acondicionado
                 
             }else {
                 // Apaga aire acondicionado o calefacción si el promedio está en el rango de 21-24 grados
                 printf("Temperatura baja: Apagando aire acondicionado\n");
-                printf("Temperatura: %d\n", avg_temp_celsius);
+                //printf("Temperatura: %d\n", temperatura);
+                printf("Temperatura: %.2f\n", temperatura);
                 state_air = false;
                 LedOff(LED_2);
             }
@@ -241,12 +243,15 @@ void app_main(void){
     };
     BleInit(&ble_configuration);
 
-    // Configuración de entrada del sensor de temperatura
+    /*Configuración de entrada del sensor de temperatura
     analog_input_config_t Analog_config_temperature = {
         .input = CH1,
         .mode = ADC_SINGLE
     };
-    AnalogInputInit(&Analog_config_temperature);
+    AnalogInputInit(&Analog_config_temperature);*/
+
+    //dht11Init(GPIO_1);
+       dht11Init(GPIO_1);
 
     // Configuración de entrada del sensor de luz
     analog_input_config_t Analog_config_light = {
