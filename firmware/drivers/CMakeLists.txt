@@ -30,7 +30,7 @@ set(srcs
     "devices/src/l293.c"
 
     "devices/src/dht11.c"
-    "devices/src/rtc_mcu.c"
+   # "devices/src/rtc_mcu.c"
     )
 
 # Always included headers
