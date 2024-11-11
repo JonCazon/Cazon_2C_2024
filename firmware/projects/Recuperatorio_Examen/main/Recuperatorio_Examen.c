@@ -2,7 +2,11 @@
  *
  * @section se describe un sistema de balanzas para camniones
 
-*
+*@section hardConn Conexión de Hardware
+ *
+ * - Canal ADC conectado al CH1.
+     Canal ADC conectado al CH2.
+ * - UART configurada a 115200 baud.
  *
  * @section hardConn Hardware Connection
  *
