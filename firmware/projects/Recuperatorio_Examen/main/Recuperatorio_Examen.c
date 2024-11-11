@@ -11,7 +11,7 @@
  * | 	PIN_13	 	| 	GPIO_3		| //ECHO
  *      PIN_12          GPIO_2        //TRIGGER
  *
- *  | 	PIN_13	 	| 	GPIO_3		| //ECHO
+ *  | 	PIN_8	 	| 	GPIO_1		| //ECHO
  *      PIN_12          GPIO_2        //TRIGGER
  
  * @section changelog Changelog
