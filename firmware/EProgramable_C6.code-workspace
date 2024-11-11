@@ -65,6 +65,9 @@
         },
         {
             "path": "projects/Examen"
+        },
+        {
+            "path": "projects/Recuperatorio_Examen"
         }
     ],
     "settings": {
@@ -124,7 +127,8 @@
             "compare": "c",
             "stdio.h": "c",
             "dht11.h": "c",
-            "type_traits": "c"
+            "type_traits": "c",
+            "cstdint": "c"
         },
     },
     "tasks": {
