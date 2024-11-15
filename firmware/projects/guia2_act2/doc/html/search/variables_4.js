@@ -13,13 +13,14 @@ var searchData=
   ['dextra_5fcomponent_5fdirs_10',['DEXTRA_COMPONENT_DIRS',['../bootloader-cfgcmd_8txt.html#aaa7adf2abd4f32b23f8ff16b669c6d02',1,'bootloader-cfgcmd.txt']]],
   ['didf_5fpath_11',['DIDF_PATH',['../bootloader-cfgcmd_8txt.html#a19a24590bc7f43578c0f7e633baf4afa',1,'bootloader-cfgcmd.txt']]],
   ['didf_5ftarget_12',['DIDF_TARGET',['../bootloader-cfgcmd_8txt.html#abc5d97fcf29ee515279e7fa81e2590cc',1,'bootloader-cfgcmd.txt']]],
-  ['dis_5ftask_5fhandle_13',['Dis_task_handle',['../guia2__act2_8c.html#a491a251795abad24891aa4f3b952cbe5',1,'guia2_act2.c']]],
-  ['disconnect_14',['disconnect',['../unionesp__hidd__cb__param__t.html#a64d7dd06fe8e2fd861596c80c6faaae6',1,'esp_hidd_cb_param_t']]],
-  ['disp_5ffun_5fctrl_15',['disp_fun_ctrl',['../ili9341_8c.html#a1c5f9f3b3ce68b179a541aaeb825cd02',1,'ili9341.c']]],
-  ['dproject_5fsource_5fdir_16',['DPROJECT_SOURCE_DIR',['../bootloader-cfgcmd_8txt.html#a1d83e9a0af88ebe1ce48b704e0dc05d9',1,'bootloader-cfgcmd.txt']]],
-  ['dpython_17',['DPYTHON',['../bootloader-cfgcmd_8txt.html#ac3f061964764d81c905f3cfcd94818a1',1,'bootloader-cfgcmd.txt']]],
-  ['dpython_5fdeps_5fchecked_18',['DPYTHON_DEPS_CHECKED',['../bootloader-cfgcmd_8txt.html#adff3294f6aaf3cb0431699320441dbe3',1,'bootloader-cfgcmd.txt']]],
-  ['driv_5ftim_5fctrl_5fa_19',['driv_tim_ctrl_a',['../ili9341_8c.html#afc83c18e8d0854b8b4cdb9aca29c312b',1,'ili9341.c']]],
-  ['driv_5ftim_5fctrl_5fb_20',['driv_tim_ctrl_b',['../ili9341_8c.html#a9f16309f2f64840481039f862dac26e6',1,'ili9341.c']]],
-  ['dsdkconfig_21',['DSDKCONFIG',['../bootloader-cfgcmd_8txt.html#a77da9fc66e09bfd3c3055f99d4535476',1,'bootloader-cfgcmd.txt']]]
+  ['dignore_5fextra_5fcomponent_13',['DIGNORE_EXTRA_COMPONENT',['../bootloader-cfgcmd_8txt.html#a8c6183e4a54788704fb77d901eab4317',1,'bootloader-cfgcmd.txt']]],
+  ['dis_5ftask_5fhandle_14',['Dis_task_handle',['../guia2__act2_8c.html#a491a251795abad24891aa4f3b952cbe5',1,'guia2_act2.c']]],
+  ['disconnect_15',['disconnect',['../unionesp__hidd__cb__param__t.html#a64d7dd06fe8e2fd861596c80c6faaae6',1,'esp_hidd_cb_param_t']]],
+  ['disp_5ffun_5fctrl_16',['disp_fun_ctrl',['../ili9341_8c.html#a1c5f9f3b3ce68b179a541aaeb825cd02',1,'ili9341.c']]],
+  ['dproject_5fsource_5fdir_17',['DPROJECT_SOURCE_DIR',['../bootloader-cfgcmd_8txt.html#a1d83e9a0af88ebe1ce48b704e0dc05d9',1,'bootloader-cfgcmd.txt']]],
+  ['dpython_18',['DPYTHON',['../bootloader-cfgcmd_8txt.html#ac3f061964764d81c905f3cfcd94818a1',1,'bootloader-cfgcmd.txt']]],
+  ['dpython_5fdeps_5fchecked_19',['DPYTHON_DEPS_CHECKED',['../bootloader-cfgcmd_8txt.html#adff3294f6aaf3cb0431699320441dbe3',1,'bootloader-cfgcmd.txt']]],
+  ['driv_5ftim_5fctrl_5fa_20',['driv_tim_ctrl_a',['../ili9341_8c.html#afc83c18e8d0854b8b4cdb9aca29c312b',1,'ili9341.c']]],
+  ['driv_5ftim_5fctrl_5fb_21',['driv_tim_ctrl_b',['../ili9341_8c.html#a9f16309f2f64840481039f862dac26e6',1,'ili9341.c']]],
+  ['dsdkconfig_22',['DSDKCONFIG',['../bootloader-cfgcmd_8txt.html#a77da9fc66e09bfd3c3055f99d4535476',1,'bootloader-cfgcmd.txt']]]
 ];

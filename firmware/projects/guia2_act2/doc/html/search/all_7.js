@@ -27,10 +27,10 @@ var searchData=
   ['fonts_2ec_24',['fonts.c',['../fonts_8c.html',1,'']]],
   ['fonts_2eh_25',['fonts.h',['../fonts_8h.html',1,'']]],
   ['format_26',['format',['../structprf__char__pres__fmt.html#a7864fd50d470f893524181b4a59d9828',1,'prf_char_pres_fmt']]],
-  ['frame_5fctrl_27',['frame_ctrl',['../ili9341_8c.html#aa3d2f2e1764e68edcf0585da630a8739',1,'ili9341.c']]],
-  ['frame_5fctrl_28',['FRAME_CTRL',['../ili9341_8c.html#a7f2398c30b4b925af593fae3bb4168d0',1,'ili9341.c']]],
+  ['frame_5fctrl_27',['FRAME_CTRL',['../ili9341_8c.html#a7f2398c30b4b925af593fae3bb4168d0',1,'ili9341.c']]],
+  ['frame_5fctrl_28',['frame_ctrl',['../ili9341_8c.html#aa3d2f2e1764e68edcf0585da630a8739',1,'ili9341.c']]],
   ['func_5fp_29',['func_p',['../structanalog__input__config__t.html#a672985730d2c0cf9105559adc9759a3a',1,'analog_input_config_t::func_p'],['../structble__config__t.html#a331819affab0b6948eb77bb32a9c8a63',1,'ble_config_t::func_p'],['../structspi__mcu__config__t.html#a672985730d2c0cf9105559adc9759a3a',1,'spi_mcu_config_t::func_p'],['../structtimer__config__t.html#a672985730d2c0cf9105559adc9759a3a',1,'timer_config_t::func_p'],['../structserial__config__t.html#a672985730d2c0cf9105559adc9759a3a',1,'serial_config_t::func_p']]],
-  ['funcion_5ftecla_5f1_30',['Funcion_Tecla_1',['../guia2__act2_8c.html#a8f8d256c4d3333bdef88328557d8effa',1,'guia2_act2.c']]],
-  ['funcion_5ftecla_5f2_31',['Funcion_Tecla_2',['../guia2__act2_8c.html#a896f12abe7f2cabcf4a20c4eb0072bc6',1,'guia2_act2.c']]],
-  ['functimer_5fdistancia_32',['FuncTimer_Distancia',['../guia2__act2_8c.html#ae648d4d0dd330ede968fb476a3a1b97a',1,'guia2_act2.c']]]
+  ['funcion_5ftecla_5f1_30',['Funcion_Tecla_1',['../guia2__act2_8c.html#a4ee905b45d0fd2e35cb3d8e4d05182aa',1,'guia2_act2.c']]],
+  ['funcion_5ftecla_5f2_31',['Funcion_Tecla_2',['../guia2__act2_8c.html#af8a87dd132f90f26349f2b65e582fe8e',1,'guia2_act2.c']]],
+  ['functimer_5fdistancia_32',['FuncTimer_Distancia',['../guia2__act2_8c.html#a58b808e887fefdad5a2dbf9bde04f508',1,'guia2_act2.c']]]
 ];

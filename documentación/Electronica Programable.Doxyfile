@@ -74,7 +74,7 @@ PROJECT_ICON           = imágenes/icon.ico
 # entered, it will be relative to the location where Doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = ../firmware/projects/Recuperatorio_Examen/doc
+OUTPUT_DIRECTORY       = ../firmware/projects/guia2_act4_2daParte/doc
 
 # If the CREATE_SUBDIRS tag is set to YES then Doxygen will create up to 4096
 # sub-directories (in 2 levels) under the output directory of each output format
@@ -965,7 +965,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../firmware/projects/Recuperatorio_Examen \
+INPUT                  = ../firmware/projects/guia2_act4_2daParte \
                          ../firmware/drivers
 
 # This tag can be used to specify the character encoding of the source files

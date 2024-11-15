@@ -15,7 +15,12 @@
  *
  * - Canal ADC conectado al CH1.
  * - UART configurada a 115200 baud.
- *
+ * 
+ *  |    Peripheral  |   ESP32   	   |
+ * |:--------------:|:--------------   
+ * | PIN_8     	|Potenciometro GPIO1/CH1  |	
+ * |     VCC        |   5V              |
+ * |     GND        |   GND             |
  * @section changelog Historial de Cambios
  *
  * |   Fecha      | Descripción                                    |

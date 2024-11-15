@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "guia2_act2", "index.html", [
+  [ "recuperatorio", "index.html", [
     [ "guia2_ej1Distancia", "index.html", "index" ],
     [ "Template", "md__c_1_2_users_2_pona_2_desktop_2_repositorios_2_cazon__2_c__2024_2firmware_2projects_2guia2__act2_2_r_e_a_d_m_e.html", null ],
     [ "Topics", "topics.html", "topics" ],
@@ -54,20 +54,20 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html",
-"bootloader_2config_2sdkconfig_8h.html#a3307707ff107bdf845224f00b7987e6e",
-"bootloader_2config_2sdkconfig_8h.html#aa58478273b2543a98787784b66244599",
-"config_2sdkconfig_8h.html#a150bf74f17582733032be76db2cfd495",
-"config_2sdkconfig_8h.html#a5d176f4035c9212abc1de2ab58dd7573",
-"config_2sdkconfig_8h.html#aa7b3bf26fab282b149e7ce6f4d75a8c4",
-"config_2sdkconfig_8h.html#af4d2145068215efc77966367ac2b79fa",
-"globals_vars_p.html",
-"group___b_u_z_z_e_r.html#ga934b0ccc182054ca8da5c67c0e78a04c",
-"group___i_l_i9341.html#ga7b187b4cb92aa6b28a51fbfd5153aa2b",
-"group___m_p_u6050.html#ga55e8ce4b4d966864f96ce7407fcad0ec",
-"group___m_p_u6050.html#gac82a37e68ba0d45dbe452d09e470643c",
-"hx711_8c.html#a11d946235bb0123edad7b8947df9ac8a",
-"servo__sg90_8c.html#a99ea7d692f294ea773d8dd1becfa5281",
-"ws2812b_8h.html"
+"bootloader_2config_2sdkconfig_8h.html#a2fd7ffcf1f58b518df2b154b0f3dba0e",
+"bootloader_2config_2sdkconfig_8h.html#a9ba5bc78c0f32ee5bfca16978368e7f2",
+"config_2sdkconfig_8h.html#a0854135120a7e5d07b431cb2d02e1061",
+"config_2sdkconfig_8h.html#a4c1ee625ce3705a9e9ebf334b1d2af91",
+"config_2sdkconfig_8h.html#a9361327aa57020dac321851636466de8",
+"config_2sdkconfig_8h.html#ad7ffee4c6b767e812c7a5e53e1523ff7",
+"fonts_8c.html#a7bac766f19b15d0211446b1938f30135",
+"group___b_l_e.html#ggaed078c594a86d36a49f51710e35c405baa59864204064d3e8fac5271b69a7da23",
+"group___i2_c.html#ga9b2cf38ef7155fdd7cc00407f4ff954a",
+"group___m_p_u6050.html#ga268e7470796885d36d1d03eb0aac43ee",
+"group___m_p_u6050.html#ga96b955f0af5d7c13ae9fa1f97e79af02",
+"group___neo_pixel___stripe.html#gafac09aef2fe0017a3bbc6e578c062365",
+"microcontroller_2inc_2dht11_8h_source.html",
+"structhidd__le__env__t.html#a8d358a50fa9a4657e7833e6fafd061cb"
 ];
 
 var SYNCONMSG = 'pulsar para deshabilitar sincronización';

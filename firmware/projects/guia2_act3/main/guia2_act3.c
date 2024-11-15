@@ -12,12 +12,13 @@ Con las teclas “O” y “H”, replicar la funcionalidad de las teclas 1 y 2 
 *
  *
  * @section hardConn Hardware Connection
- *
+ * |  HC-SR04       |   ESP32       |
  * |    Peripheral  |   ESP32   	|
  * |:--------------:|:--------------|
  * | 	PIN_13	 	| 	GPIO_3		| //ECHO
- *      PIN_12          GPIO_2        //TRIGGER
- *
+ * |    PIN_12      |   GPIO_2      |    //TRIGGER
+ * |     VCC        |   5V          |
+ * |     GND        |   GND         |
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |

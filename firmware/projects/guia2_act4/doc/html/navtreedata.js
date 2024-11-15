@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "guia2_act4", "index.html", [
+  [ "recuperatorio", "index.html", [
     [ "Guía 2 - Actividad 4 - conversion Analogico a digital", "index.html", "index" ],
     [ "Template", "md__c_1_2_users_2_pona_2_desktop_2_repositorios_2_cazon__2_c__2024_2firmware_2projects_2guia2__act4_2_r_e_a_d_m_e.html", null ],
     [ "Topics", "topics.html", "topics" ],
@@ -54,19 +54,21 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_c_make_files_2_check_type_size_2_t_i_m_e___t___s_i_z_e_8c.html",
-"bootloader_2config_2sdkconfig_8h.html#a3307707ff107bdf845224f00b7987e6e",
-"bootloader_2config_2sdkconfig_8h.html#aa58478273b2543a98787784b66244599",
-"config_2sdkconfig_8h.html#a150bf74f17582733032be76db2cfd495",
-"config_2sdkconfig_8h.html#a5d176f4035c9212abc1de2ab58dd7573",
-"config_2sdkconfig_8h.html#aa7b3bf26fab282b149e7ce6f4d75a8c4",
-"config_2sdkconfig_8h.html#af4d2145068215efc77966367ac2b79fa",
-"globals_vars_p.html",
-"group___b_u_z_z_e_r.html#ga934b0ccc182054ca8da5c67c0e78a04c",
-"group___i_l_i9341.html#ga7b187b4cb92aa6b28a51fbfd5153aa2b",
-"group___m_p_u6050.html#ga55e8ce4b4d966864f96ce7407fcad0ec",
-"group___m_p_u6050.html#gac82a37e68ba0d45dbe452d09e470643c",
-"hx711_8c.html#a4fbf16bf5edd9e2a5e589d1704c5c295",
-"servo__sg90_8c_source.html"
+"bootloader_2config_2sdkconfig_8h.html#a2fd7ffcf1f58b518df2b154b0f3dba0e",
+"bootloader_2config_2sdkconfig_8h.html#a9a60b5083f3641a808fa51c66047b2a3",
+"config_2sdkconfig_8h.html#a07217da8d14e6b6849b09fcd128f3015",
+"config_2sdkconfig_8h.html#a4198e165058fee5a6180c87e72f5be86",
+"config_2sdkconfig_8h.html#a7d9f8fa6f6719d6e8f3eccc1a9831bad",
+"config_2sdkconfig_8h.html#abaf43292385c4b9ba76bc551aceb53a9",
+"config_2sdkconfig_8h.html#af2ec06bd6c2c5246c1d5f2240ba1ced7",
+"globals_k.html",
+"group___b_u_z_z_e_r.html#ga55ebff842099b32c7e80f0870df9730e",
+"group___i_c_o_n_s.html#gga945c9cb2ded81b38da222e91d09df40baf07ab690a81bb1e4b35a273a5aa3ba64",
+"group___m_p_u6050.html#ga49790a56674e4dfe184ec067295e26ec",
+"group___m_p_u6050.html#gab89c01f38370289d7e9f323871014370",
+"group___u_a_r_t.html#gaeb142fa2425b80bddba60121b1cf13f2",
+"projects_2guia2__act4_2build_2bootloader_2_c_make_files_23_824_80_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8",
+"topics.html"
 ];
 
 var SYNCONMSG = 'pulsar para deshabilitar sincronización';
