@@ -85,6 +85,7 @@ void FuncTimer_Distancia(void* param){
 static void Leer_Distancia_Task(void *pvParameter){
    uint16_t distancia;
     while(true){
+        if(activar== true){
          distancia=HcSr04ReadDistanceInCentimeters();
          
 			if(distancia > 0 && distancia < 10){
@@ -119,7 +120,7 @@ static void Leer_Distancia_Task(void *pvParameter){
     //vTaskDelay(Delay1 / portTICK_PERIOD_MS);
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY); /* La tarea espera en este punto hasta recibir una notificación */
         
-    }  
+    }  }
     
 }
 

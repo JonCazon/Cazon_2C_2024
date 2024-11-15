@@ -112,7 +112,7 @@ void FuncTimer_Velocidad(void* param){
 static void Leer_Velocidad_Task(void *pvParameter){
    uint16_t distancia1;
    uint16_t distancia2;
-   uint16_t Velocidad;
+   uint16_t velocidad;
     while(true){
          distancia1=HcSr04ReadDistanceInCentimeters();
 		 //vTaskDelay(Delay1 / portTICK_PERIOD_MS); // demoro un tiempo  de  1 seg para tomar otra muestra
@@ -137,7 +137,7 @@ static void Leer_Velocidad_Task(void *pvParameter){
                 LedOff(LED_3);
 			}
          
-    if(hold== true)
+    //if(hold== true)
 	//LcdItsE0803Write(distancia);
      /* uso la funcion para convertir el numero medido a string y lo mando por la comsula*/
 	
@@ -159,8 +159,8 @@ static void Leer_Velocidad_Task(void *pvParameter){
  * 
  * @param pParam Puntero a los parámetros de la tarea (no se utiliza).
  */
-static void conversionADC(void *pParam) {
-    while (true) {
+void conversionADC() {
+    
         
         // obtiene valor analógico (ADC) del canal CH1 y lo guarda en la variable global valores.
 		AnalogInputReadSingle(CH1, &dato1);
@@ -169,7 +169,7 @@ static void conversionADC(void *pParam) {
 		//dato2=dato2++;
 
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // para la interrupcion
-    }
+    
 }
 /**
  * @brief Función que se ejecuta en la interrupción del Timer A.
@@ -186,23 +186,27 @@ void funcion_TimerB(void *pParam) {
 static void Leer_Peso_Task(void *pvParameter){
    
     while(true){
+
+             uint16_t aux1; // Valor leído del ADC
+             uint16_t aux2;
+
                for(int i=0; i<50; i++){
-				conversionADC();
-				dato1=dato1++;
-		        dato2=dato2++;
+				conversionADC( );
+				aux1=aux1+dato1;
+		        aux2=aux2+dato2;
 			   }
-			   dato1=(dato1/50)*(3.3/20000); los convierto kilos
-			   dato2=(dato2/50)*(3.3/20000);
-              peso=dato1+dato2;
+			   aux1=(aux1/50)*(3.3/20000); //los convierto kilos
+			   aux2=(aux2/50)*(3.3/20000);
+              peso=aux1+aux2;
 
 		UartSendString(UART_PC, "Peso:");	  
-        UartSendString(UART_PC, (char*) UartItoa(valores, 10));
+        UartSendString(UART_PC, (char*) UartItoa(peso, 10));
 		 //fuerza la converison casteo
 		UartSendString(UART_PC, " kg \r"); // para establecer el caracter fin 
 
 	}
 	dato1=0; //reset
-	dato=0;
+	dato2=0;
 
 }
 
@@ -216,7 +220,7 @@ static void Funcion_Leer_teclas_BarreraTask(void *pvParameter){
         case'o': //O
                 
 				//gpioSetLevel(GPIO_1, activar);
-                GPIOOn(Gpio_20);
+                GPIOOn(GPIO_20);
 				UartSendString(UART_PC, "Barrera abierta");
 
             break;
@@ -272,7 +276,7 @@ GPIOInit(GPIO_20, GPIO_OUTPUT);
 
 /* Inicialización de timers */
     timer_config_t timer_momento_velocidad = {
-        .timer = TIMER_,
+        .timer = TIMER_B,
         .period = CONFIG_Distancia_PERIOD_US,
         .func_p = FuncTimer_Velocidad,
         .param_p = NULL

@@ -72,6 +72,7 @@ bool hold=false;
 static void Leer_Distancia(void *pvParameter){
    uint16_t distancia;
     while(true){
+        if(activar== true){
          distancia=HcSr04ReadDistanceInCentimeters();
          
 			if(distancia > 0 && distancia < 10){
@@ -99,7 +100,7 @@ static void Leer_Distancia(void *pvParameter){
 	LcdItsE0803Write(distancia);
     vTaskDelay(Delay1 / portTICK_PERIOD_MS);
         
-    }
+    }}
     
     
 }
